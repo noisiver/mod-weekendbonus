@@ -59,7 +59,7 @@ class WeekendBonusConfig : WorldScript
         void OnAfterConfigLoad(bool /*reload*/) override
         {
             multiplierExperience = sConfigMgr->GetIntDefault("Multiplier.Experience", 1);
-            multiplierReputation = sConfigMgr->GetIntDefault("Multiplier.reputation", 1);
+            multiplierReputation = sConfigMgr->GetIntDefault("Multiplier.Reputation", 1);
         }
 };
 
