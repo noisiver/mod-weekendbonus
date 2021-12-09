@@ -4,7 +4,7 @@ This is a module for [AzerothCore](https://github.com/azerothcore/azerothcore-wo
 # Features
 This module will increase the experience and reputation gained on weekends. That means friday, saturday and sunday.
 
-The multiplier can be changed using the config.
+The multipliers can be changed using the configuration options.
 
 # Additional information
 This module is part of my collection of modules.
