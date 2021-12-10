@@ -37,15 +37,15 @@ class WeekendBonus : public PlayerScript
             {
                 if (multiplierExperience > 1 && multiplierReputation > 1)
                 {
-                    ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, increasing the experience and reputation received!");
+                    ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, increasing the experience and reputation gained!");
                 }
                 else if (multiplierExperience > 1)
                 {
-                    ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, increasing the experience received!");
+                    ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, increasing the experience gained!");
                 }
                 else if (multiplierReputation > 1)
                 {
-                    ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, increasing the reputation received!");
+                    ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, increasing the reputation gained!");
                 }
             }
         }
@@ -63,8 +63,68 @@ class WeekendBonusConfig : WorldScript
         }
 };
 
+class WeekendBonusAnnouncement : WorldScript
+{
+    public:
+        WeekendBonusAnnouncement() : WorldScript("WeekendBonusAnnouncement") {}
+
+        void OnStartup() override
+        {
+            triggered = false;
+        }
+
+        void OnUpdate(uint32 diff) override
+        {
+            DoAnnouncements();
+        }
+
+        private:
+            bool triggered;
+            time_t localTime;
+
+            void DoAnnouncements()
+            {
+                localTime = time(NULL);
+
+                if (localtime(&localTime)->tm_wday == 5 /*Friday*/ && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
+                {
+                    if (!triggered)
+                    {
+                        if (multiplierExperience > 1 && multiplierReputation > 1)
+                        {
+                            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the experience and reputation gained!");
+                        }
+                        else if (multiplierExperience > 1)
+                        {
+                            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the experience gained!");
+                        }
+                        else if (multiplierReputation > 1)
+                        {
+                            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the reputation gained!");
+                        }
+
+                        triggered = true;
+                    }
+                }
+                else if (localtime(&localTime)->tm_wday == 1 /*Monday*/ && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
+                {
+                    if (!triggered)
+                    {
+                        sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is no longer active.");
+                        triggered = true;
+                    }
+                }
+                else
+                {
+                    if (triggered)
+                        triggered = false;
+                }
+            }
+};
+
 void AddWeekendBonusScripts()
 {
     new WeekendBonus();
     new WeekendBonusConfig();
+    new WeekendBonusAnnouncement();
 }
