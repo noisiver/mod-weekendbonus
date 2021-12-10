@@ -6,6 +6,17 @@
 uint32 multiplierExperience;
 uint32 multiplierReputation;
 
+enum Day
+{
+    SUNDAY = 0,
+    MONDAY,
+    TUESDAY,
+    WEDNESDAY,
+    THURSDAY,
+    FRIDAY,
+    SATURDAY
+};
+
 class WeekendBonus : public PlayerScript
 {
     public:
@@ -15,7 +26,7 @@ class WeekendBonus : public PlayerScript
         {
             time_t t = time(NULL);
 
-            if (localtime(&t)->tm_wday == 5 /*Friday*/ || localtime(&t)->tm_wday == 6 /*Saturday*/ || localtime(&t)->tm_wday == 0 /*Sunday*/)
+            if (localtime(&t)->tm_wday == Day::FRIDAY || localtime(&t)->tm_wday == Day::SATURDAY || localtime(&t)->tm_wday == Day::SUNDAY)
                 if (multiplierExperience > 1)
                     amount *= multiplierExperience;
         }
@@ -24,7 +35,7 @@ class WeekendBonus : public PlayerScript
         {
             time_t t = time(NULL);
 
-            if (localtime(&t)->tm_wday == 5 /*Friday*/ || localtime(&t)->tm_wday == 6 /*Saturday*/ || localtime(&t)->tm_wday == 0 /*Sunday*/)
+            if (localtime(&t)->tm_wday == Day::FRIDAY || localtime(&t)->tm_wday == Day::SATURDAY || localtime(&t)->tm_wday == Day::SUNDAY)
                 if (multiplierReputation > 1)
                     standing *= multiplierReputation;
         }
@@ -33,7 +44,7 @@ class WeekendBonus : public PlayerScript
         {
             time_t t = time(NULL);
 
-            if (localtime(&t)->tm_wday == 5 /*Friday*/ || localtime(&t)->tm_wday == 6 /*Saturday*/ || localtime(&t)->tm_wday == 0 /*Sunday*/)
+            if (localtime(&t)->tm_wday == Day::FRIDAY || localtime(&t)->tm_wday == Day::SATURDAY || localtime(&t)->tm_wday == Day::SUNDAY)
             {
                 if (multiplierExperience > 1 && multiplierReputation > 1)
                 {
@@ -86,7 +97,7 @@ class WeekendBonusAnnouncement : WorldScript
             {
                 localTime = time(NULL);
 
-                if (localtime(&localTime)->tm_wday == 5 /*Friday*/ && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
+                if (localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
                 {
                     if (!triggered)
                     {
@@ -106,7 +117,7 @@ class WeekendBonusAnnouncement : WorldScript
                         triggered = true;
                     }
                 }
-                else if (localtime(&localTime)->tm_wday == 1 /*Monday*/ && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
+                else if (localtime(&localTime)->tm_wday == Day::MONDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
                 {
                     if (!triggered)
                     {
