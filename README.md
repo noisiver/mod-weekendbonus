@@ -2,7 +2,7 @@
 This is a module for [AzerothCore](https://github.com/azerothcore/azerothcore-wotlk).
 
 # Features
-This module will increase the experience and reputation gained on weekends. That means friday, saturday and sunday.
+This module will increase the experience and reputation gained on weekends. That means friday, saturday and sunday. It will announce the start and end of the weekend bonus.
 
 The multipliers can be changed using the configuration options.
 
@@ -14,6 +14,8 @@ This module is part of my collection of modules.
 [Assistant](https://github.com/tkn963/mod-assistant) : Allows players to obtain certain items and utilities from an NPC.
 
 [LearnSpells](https://github.com/tkn963/mod-learnspells) : Lets players learn class spells, talent ranks, proficiencies and mounts when leveling up or logging into the world.
+
+[LevelReward](https://github.com/tkn963/mod-levelreward) : Gives players a reward of gold when reaching specific levels.
 
 [RecruitAFriend](https://github.com/tkn963/mod-recruitafriend) : Lets players activate recruit a friend with an in-game command.
 
