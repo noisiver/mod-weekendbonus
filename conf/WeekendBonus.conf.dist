@@ -1,7 +1,7 @@
 [worldserver]
 
 # Multiplier for experience gains on weekends
-Multiplier.Experience = 1
+Multiplier.Experience = 2
 
 # Multiplier for reputation gains on weekends
-Multiplier.Reputation = 1
+Multiplier.Reputation = 2
