@@ -17,10 +17,10 @@ enum Day
     SATURDAY
 };
 
-class WeekendBonus : public PlayerScript
+class WeekendBonusPlayer : public PlayerScript
 {
     public:
-        WeekendBonus() : PlayerScript("WeekendBonus") {}
+        WeekendBonusPlayer() : PlayerScript("WeekendBonusPlayer") {}
 
         void OnGiveXP(Player* player, uint32& amount, Unit* /*victim*/) override
         {
@@ -62,22 +62,16 @@ class WeekendBonus : public PlayerScript
         }
 };
 
-class WeekendBonusConfig : WorldScript
+class WeekendBonusWorld : WorldScript
 {
     public:
-        WeekendBonusConfig() : WorldScript("WeekendBonusConfig") {}
+        WeekendBonusWorld() : WorldScript("WeekendBonusWorld") {}
 
         void OnAfterConfigLoad(bool /*reload*/) override
         {
             multiplierExperience = sConfigMgr->GetOption<int32>("WeekendBonus.Multiplier.Experience", 1);
             multiplierReputation = sConfigMgr->GetOption<int32>("WeekendBonus.Multiplier.Reputation", 1);
         }
-};
-
-class WeekendBonusAnnouncement : WorldScript
-{
-    public:
-        WeekendBonusAnnouncement() : WorldScript("WeekendBonusAnnouncement") {}
 
         void OnStartup() override
         {
@@ -135,7 +129,6 @@ class WeekendBonusAnnouncement : WorldScript
 
 void AddWeekendBonusScripts()
 {
-    new WeekendBonus();
-    new WeekendBonusConfig();
-    new WeekendBonusAnnouncement();
+    new WeekendBonusPlayer();
+    new WeekendBonusWorld();
 }
