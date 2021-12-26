@@ -83,48 +83,48 @@ class WeekendBonusWorld : WorldScript
             DoAnnouncements();
         }
 
-        private:
-            bool triggered;
-            time_t localTime;
+    private:
+        bool triggered;
+        time_t localTime;
 
-            void DoAnnouncements()
+        void DoAnnouncements()
+        {
+            localTime = time(NULL);
+
+            if (localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
             {
-                localTime = time(NULL);
-
-                if (localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
+                if (!triggered)
                 {
-                    if (!triggered)
+                    if (multiplierExperience > 1 && multiplierReputation > 1)
                     {
-                        if (multiplierExperience > 1 && multiplierReputation > 1)
-                        {
-                            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the experience and reputation gained!");
-                        }
-                        else if (multiplierExperience > 1)
-                        {
-                            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the experience gained!");
-                        }
-                        else if (multiplierReputation > 1)
-                        {
-                            sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the reputation gained!");
-                        }
-
-                        triggered = true;
+                        sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the experience and reputation gained!");
                     }
-                }
-                else if (localtime(&localTime)->tm_wday == Day::MONDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
-                {
-                    if (!triggered)
+                    else if (multiplierExperience > 1)
                     {
-                        sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is no longer active.");
-                        triggered = true;
+                        sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the experience gained!");
                     }
-                }
-                else
-                {
-                    if (triggered)
-                        triggered = false;
+                    else if (multiplierReputation > 1)
+                    {
+                        sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, increasing the reputation gained!");
+                    }
+
+                    triggered = true;
                 }
             }
+            else if (localtime(&localTime)->tm_wday == Day::MONDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
+            {
+                if (!triggered)
+                {
+                    sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is no longer active.");
+                    triggered = true;
+                }
+            }
+            else
+            {
+                if (triggered)
+                    triggered = false;
+            }
+        }
 };
 
 void AddWeekendBonusScripts()
