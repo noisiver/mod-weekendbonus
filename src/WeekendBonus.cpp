@@ -5,7 +5,9 @@
 
 float multiplierExperience;
 float multiplierMoney;
+float multiplierProfessions;
 float multiplierReputation;
+float multiplierProficiencies;
 
 enum Day
 {
@@ -29,7 +31,7 @@ class WeekendBonusPlayer : public PlayerScript
 
             if (localtime(&t)->tm_wday == Day::FRIDAY || localtime(&t)->tm_wday == Day::SATURDAY || localtime(&t)->tm_wday == Day::SUNDAY)
             {
-                ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, granting you bonuses to experience, reputation and money!");
+                ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, granting you bonuses!");
             }
         }
 };
@@ -43,7 +45,9 @@ class WeekendBonusWorld : WorldScript
         {
             multiplierExperience = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Experience", 2.0f);
             multiplierMoney = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Money", 2.0f);
+            multiplierProfessions = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Professions", 2.0f);
             multiplierReputation = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Reputation", 2.0f);
+            multiplierProficiencies = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Proficiencies", 2.0f);
         }
 
         void OnStartup() override
@@ -70,7 +74,7 @@ class WeekendBonusWorld : WorldScript
 
             if (localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0 && !triggered)
             {
-                sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, granting you bonuses to experience, reputation and money!");
+                sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, granting you bonuses!");
 
                 SetWorldRates();
             }
@@ -92,8 +96,16 @@ class WeekendBonusWorld : WorldScript
                 sWorld->setRate(RATE_XP_QUEST_DF, sWorld->getRate(RATE_XP_QUEST_DF) * multiplierExperience);
                 sWorld->setRate(RATE_XP_EXPLORE, sWorld->getRate(RATE_XP_EXPLORE) * multiplierExperience);
                 sWorld->setRate(RATE_XP_PET, sWorld->getRate(RATE_XP_PET) * multiplierExperience);
+
                 sWorld->setRate(RATE_DROP_MONEY, sWorld->getRate(RATE_DROP_MONEY) * multiplierMoney);
+
+                sWorld->setIntConfig(CONFIG_SKILL_GAIN_CRAFTING, sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING) * multiplierProfessions);
+                sWorld->setIntConfig(CONFIG_SKILL_GAIN_GATHERING, sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING) * multiplierProfessions);
+
                 sWorld->setRate(RATE_REPUTATION_GAIN, sWorld->getRate(RATE_REPUTATION_GAIN) * multiplierReputation);
+
+                sWorld->setIntConfig(CONFIG_SKILL_GAIN_DEFENSE, sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE) * multiplierProficiencies);
+                sWorld->setIntConfig(CONFIG_SKILL_GAIN_WEAPON, sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON) * multiplierProficiencies);
 
                 triggered = true;
             }
@@ -105,8 +117,16 @@ class WeekendBonusWorld : WorldScript
                 sWorld->setRate(RATE_XP_QUEST_DF, sWorld->getRate(RATE_XP_QUEST_DF) / multiplierExperience);
                 sWorld->setRate(RATE_XP_EXPLORE, sWorld->getRate(RATE_XP_EXPLORE) / multiplierExperience);
                 sWorld->setRate(RATE_XP_PET, sWorld->getRate(RATE_XP_PET) / multiplierExperience);
+
                 sWorld->setRate(RATE_DROP_MONEY, sWorld->getRate(RATE_DROP_MONEY) / multiplierMoney);
+
+                sWorld->setIntConfig(CONFIG_SKILL_GAIN_CRAFTING, sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING) / multiplierProfessions);
+                sWorld->setIntConfig(CONFIG_SKILL_GAIN_GATHERING, sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING) / multiplierProfessions);
+
                 sWorld->setRate(RATE_REPUTATION_GAIN, sWorld->getRate(RATE_REPUTATION_GAIN) / multiplierReputation);
+
+                sWorld->setIntConfig(CONFIG_SKILL_GAIN_DEFENSE, sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE) / multiplierProficiencies);
+                sWorld->setIntConfig(CONFIG_SKILL_GAIN_WEAPON, sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON) / multiplierProficiencies);
 
                 triggered = false;
             }

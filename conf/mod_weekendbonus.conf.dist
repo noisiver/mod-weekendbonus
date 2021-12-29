@@ -6,5 +6,11 @@ WeekendBonus.Multiplier.Experience = 2
 # Multiplier for money looted and rewarded from quests on weekends
 WeekendBonus.Multiplier.Money = 2
 
+# Multiplier for profession skill ups on weekends
+WeekendBonus.Multiplier.Professions = 2
+
 # Multiplier for reputation gains on weekends
 WeekendBonus.Multiplier.Reputation = 2
+
+# Multiplier for weapons and defense skill ups on weekends
+WeekendBonus.Multiplier.Proficiencies = 2
