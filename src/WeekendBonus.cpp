@@ -68,21 +68,17 @@ class WeekendBonusWorld : WorldScript
         {
             localTime = time(NULL);
 
-            if (localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
+            if (localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0 && !triggered)
             {
-                if (!triggered)
-                {
-                    sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, granting you bonuses to experience, reputation and money!");
-                    SetWorldRates();
-                }
+                sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, granting you bonuses to experience, reputation and money!");
+
+                SetWorldRates();
             }
-            else if (localtime(&localTime)->tm_wday == Day::MONDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0)
+            else if (localtime(&localTime)->tm_wday == Day::MONDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0 && triggered)
             {
-                if (triggered)
-                {
-                    sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is no longer active.");
-                    SetWorldRates();
-                }
+                sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is no longer active.");
+
+                SetWorldRates();
             }
         }
 
@@ -98,6 +94,7 @@ class WeekendBonusWorld : WorldScript
                 sWorld->setRate(RATE_XP_PET, sWorld->getRate(RATE_XP_PET) * multiplierExperience);
                 sWorld->setRate(RATE_DROP_MONEY, sWorld->getRate(RATE_DROP_MONEY) * multiplierMoney);
                 sWorld->setRate(RATE_REPUTATION_GAIN, sWorld->getRate(RATE_REPUTATION_GAIN) * multiplierReputation);
+
                 triggered = true;
             }
             else
@@ -110,6 +107,7 @@ class WeekendBonusWorld : WorldScript
                 sWorld->setRate(RATE_XP_PET, sWorld->getRate(RATE_XP_PET) / multiplierExperience);
                 sWorld->setRate(RATE_DROP_MONEY, sWorld->getRate(RATE_DROP_MONEY) / multiplierMoney);
                 sWorld->setRate(RATE_REPUTATION_GAIN, sWorld->getRate(RATE_REPUTATION_GAIN) / multiplierReputation);
+
                 triggered = false;
             }
         }
