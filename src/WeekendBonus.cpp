@@ -59,7 +59,7 @@ class WeekendBonusWorld : WorldScript
                 SetWorldRates();
         }
 
-        void OnUpdate(uint32 diff) override
+        void OnUpdate(uint32 /*diff*/) override
         {
             HandleWeekendBonuses();
         }
