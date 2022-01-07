@@ -48,11 +48,11 @@ class WeekendBonusWorld : WorldScript
             rateProficienciesDefense = sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE);
             rateProficienciesWeapons = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
 
-            multiplierExperience = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Experience", 2.0f);
-            multiplierMoney = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Money", 2.0f);
-            multiplierProfessions = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Professions", 2.0f);
-            multiplierReputation = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Reputation", 2.0f);
-            multiplierProficiencies = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Proficiencies", 2.0f);
+            multiplierExperience     = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Experience", 2.0f);
+            multiplierMoney          = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Money", 2.0f);
+            multiplierProfessions    = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Professions", 2.0f);
+            multiplierReputation     = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Reputation", 2.0f);
+            multiplierProficiencies  = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Proficiencies", 2.0f);
 
             if (reload)
             {
