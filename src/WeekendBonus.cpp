@@ -35,18 +35,21 @@ class WeekendBonusWorld : WorldScript
 
         void OnAfterConfigLoad(bool reload) override
         {
-            rateExperienceKill       = sWorld->getRate(RATE_XP_KILL);
-            rateExperienceBgKill     = sWorld->getRate(RATE_XP_BG_KILL);
-            rateExperienceQuest      = sWorld->getRate(RATE_XP_QUEST);
-            rateExperienceQuestDf    = sWorld->getRate(RATE_XP_QUEST_DF);
-            rateExperienceExplore    = sWorld->getRate(RATE_XP_EXPLORE);
-            rateExperiencePet        = sWorld->getRate(RATE_XP_PET);
-            rateMoney                = sWorld->getRate(RATE_DROP_MONEY);
-            rateProfessionsCrafting  = sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING);
-            rateProfessionsGathering = sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING);
-            rateReputation           = sWorld->getRate(RATE_REPUTATION_GAIN);
-            rateProficienciesDefense = sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE);
-            rateProficienciesWeapons = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
+            if (!reload)
+            {
+                rateExperienceKill       = sWorld->getRate(RATE_XP_KILL);
+                rateExperienceBgKill     = sWorld->getRate(RATE_XP_BG_KILL);
+                rateExperienceQuest      = sWorld->getRate(RATE_XP_QUEST);
+                rateExperienceQuestDf    = sWorld->getRate(RATE_XP_QUEST_DF);
+                rateExperienceExplore    = sWorld->getRate(RATE_XP_EXPLORE);
+                rateExperiencePet        = sWorld->getRate(RATE_XP_PET);
+                rateMoney                = sWorld->getRate(RATE_DROP_MONEY);
+                rateProfessionsCrafting  = sWorld->getIntConfig(CONFIG_SKILL_GAIN_CRAFTING);
+                rateProfessionsGathering = sWorld->getIntConfig(CONFIG_SKILL_GAIN_GATHERING);
+                rateReputation           = sWorld->getRate(RATE_REPUTATION_GAIN);
+                rateProficienciesDefense = sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE);
+                rateProficienciesWeapons = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
+            }
 
             multiplierExperience     = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Experience", 2.0f);
             multiplierMoney          = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Money", 2.0f);
