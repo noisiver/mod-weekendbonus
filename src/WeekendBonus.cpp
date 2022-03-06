@@ -38,7 +38,12 @@ class WeekendBonusWorld : WorldScript
             if (!reload)
             {
                 rateExperienceKill       = sWorld->getRate(RATE_XP_KILL);
-                rateExperienceBgKill     = sWorld->getRate(RATE_XP_BG_KILL);
+                rateExperienceBgKill[0]  = sWorld->getRate(RATE_XP_BG_KILL_AV);
+                rateExperienceBgKill[1]  = sWorld->getRate(RATE_XP_BG_KILL_WSG);
+                rateExperienceBgKill[2]  = sWorld->getRate(RATE_XP_BG_KILL_AB);
+                rateExperienceBgKill[3]  = sWorld->getRate(RATE_XP_BG_KILL_EOTS);
+                rateExperienceBgKill[4]  = sWorld->getRate(RATE_XP_BG_KILL_SOTA);
+                rateExperienceBgKill[5]  = sWorld->getRate(RATE_XP_BG_KILL_IC);
                 rateExperienceQuest      = sWorld->getRate(RATE_XP_QUEST);
                 rateExperienceQuestDf    = sWorld->getRate(RATE_XP_QUEST_DF);
                 rateExperienceExplore    = sWorld->getRate(RATE_XP_EXPLORE);
@@ -95,7 +100,7 @@ class WeekendBonusWorld : WorldScript
 
     private:
         uint32 rateExperienceKill;
-        uint32 rateExperienceBgKill;
+        uint32 rateExperienceBgKill[6];
         uint32 rateExperienceQuest;
         uint32 rateExperienceQuestDf;
         uint32 rateExperienceExplore;
@@ -121,7 +126,12 @@ class WeekendBonusWorld : WorldScript
             if (weekend)
             {
                 sWorld->setRate(RATE_XP_KILL, rateExperienceKill * multiplierExperience);
-                sWorld->setRate(RATE_XP_BG_KILL, rateExperienceBgKill * multiplierExperience);
+                sWorld->setRate(RATE_XP_BG_KILL_AV, rateExperienceBgKill[0] * multiplierExperience);
+                sWorld->setRate(RATE_XP_BG_KILL_WSG, rateExperienceBgKill[1] * multiplierExperience);
+                sWorld->setRate(RATE_XP_BG_KILL_AB, rateExperienceBgKill[2] * multiplierExperience);
+                sWorld->setRate(RATE_XP_BG_KILL_EOTS, rateExperienceBgKill[3] * multiplierExperience);
+                sWorld->setRate(RATE_XP_BG_KILL_SOTA, rateExperienceBgKill[4] * multiplierExperience);
+                sWorld->setRate(RATE_XP_BG_KILL_IC, rateExperienceBgKill[5] * multiplierExperience);
                 sWorld->setRate(RATE_XP_QUEST, rateExperienceQuest * multiplierExperience);
                 sWorld->setRate(RATE_XP_QUEST_DF, rateExperienceQuestDf * multiplierExperience);
                 sWorld->setRate(RATE_XP_EXPLORE, rateExperienceExplore * multiplierExperience);
@@ -140,7 +150,12 @@ class WeekendBonusWorld : WorldScript
             else
             {
                 sWorld->setRate(RATE_XP_KILL, rateExperienceKill);
-                sWorld->setRate(RATE_XP_BG_KILL, rateExperienceBgKill);
+                sWorld->setRate(RATE_XP_BG_KILL_AV, rateExperienceBgKill[0]);
+                sWorld->setRate(RATE_XP_BG_KILL_WSG, rateExperienceBgKill[1]);
+                sWorld->setRate(RATE_XP_BG_KILL_AB, rateExperienceBgKill[2]);
+                sWorld->setRate(RATE_XP_BG_KILL_EOTS, rateExperienceBgKill[3]);
+                sWorld->setRate(RATE_XP_BG_KILL_SOTA, rateExperienceBgKill[4]);
+                sWorld->setRate(RATE_XP_BG_KILL_IC, rateExperienceBgKill[5]);
                 sWorld->setRate(RATE_XP_QUEST, rateExperienceQuest);
                 sWorld->setRate(RATE_XP_QUEST_DF, rateExperienceQuestDf);
                 sWorld->setRate(RATE_XP_EXPLORE, rateExperienceExplore);
