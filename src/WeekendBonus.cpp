@@ -56,11 +56,11 @@ class WeekendBonusWorld : WorldScript
                 rateProficienciesWeapons = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
             }
 
-            multiplierExperience    = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Experience", 2.0f);
-            multiplierMoney         = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Money", 2.0f);
-            multiplierProfessions   = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Professions", 2.0f);
-            multiplierReputation    = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Reputation", 2.0f);
-            multiplierProficiencies = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Proficiencies", 2.0f);
+            multiplierExperience         = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Experience", 2.0f);
+            multiplierMoney              = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Money", 2.0f);
+            multiplierProfessions        = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Professions", 2);
+            multiplierReputation         = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Reputation", 2.0f);
+            multiplierProficiencies      = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Proficiencies", 2);
 
             if (reload)
             {
@@ -99,23 +99,23 @@ class WeekendBonusWorld : WorldScript
         }
 
     private:
-        uint32 rateExperienceKill;
-        uint32 rateExperienceBgKill[6];
-        uint32 rateExperienceQuest;
-        uint32 rateExperienceQuestDf;
-        uint32 rateExperienceExplore;
-        uint32 rateExperiencePet;
-        uint32 rateMoney;
+        float rateExperienceKill;
+        float rateExperienceBgKill[6];
+        float rateExperienceQuest;
+        float rateExperienceQuestDf;
+        float rateExperienceExplore;
+        float rateExperiencePet;
+        float rateMoney;
         uint32 rateProfessionsCrafting;
         uint32 rateProfessionsGathering;
-        uint32 rateReputation;
+        float rateReputation;
         uint32 rateProficienciesDefense;
         uint32 rateProficienciesWeapons;
 
-        uint32 multiplierExperience;
-        uint32 multiplierMoney;
+        float multiplierExperience;
+        float multiplierMoney;
         uint32 multiplierProfessions;
-        uint32 multiplierReputation;
+        float multiplierReputation;
         uint32 multiplierProficiencies;
 
         bool triggered;
