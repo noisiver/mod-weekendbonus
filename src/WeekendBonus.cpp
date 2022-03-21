@@ -84,13 +84,13 @@ class WeekendBonusWorld : WorldScript
         {
             localTime = time(NULL);
 
-            if (localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0 && !triggered)
+            if (localtime(&localTime)->tm_wday == Day::FRIDAY && !triggered)
             {
                 sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, granting you bonuses!");
                 SetWorldRates(true);
                 triggered = true;
             }
-            else if (localtime(&localTime)->tm_wday == Day::MONDAY && localtime(&localTime)->tm_hour == 0 && localtime(&localTime)->tm_min == 0 && triggered)
+            else if (localtime(&localTime)->tm_wday == Day::MONDAY && triggered)
             {
                 sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is no longer active.");
                 SetWorldRates(false);
