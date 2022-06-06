@@ -21,9 +21,9 @@ public:
 
     void OnLogin(Player* player) override
     {
-        time_t t = time(NULL);
+        time_t localTime = time(NULL);
 
-        if (localtime(&t)->tm_wday == Day::FRIDAY || localtime(&t)->tm_wday == Day::SATURDAY || localtime(&t)->tm_wday == Day::SUNDAY)
+        if ((localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour >= 18) || localtime(&localTime)->tm_wday == Day::SATURDAY || localtime(&localTime)->tm_wday == Day::SUNDAY)
             ChatHandler(player->GetSession()).SendSysMessage("The weekend bonus is active, granting you bonuses!");
     }
 };
@@ -64,7 +64,7 @@ public:
 
         if (reload)
         {
-            if (localtime(&localTime)->tm_wday == Day::FRIDAY || localtime(&localTime)->tm_wday == Day::SATURDAY || localtime(&localTime)->tm_wday == Day::SUNDAY)
+            if ((localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour >= 18) || localtime(&localTime)->tm_wday == Day::SATURDAY || localtime(&localTime)->tm_wday == Day::SUNDAY)
                 SetWorldRates(true);
             else
                 SetWorldRates(false);
@@ -76,7 +76,7 @@ public:
         triggered = false;
         localTime = time(NULL);
 
-        if (localtime(&localTime)->tm_wday == Day::FRIDAY || localtime(&localTime)->tm_wday == Day::SATURDAY || localtime(&localTime)->tm_wday == Day::SUNDAY)
+        if ((localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour >= 18) || localtime(&localTime)->tm_wday == Day::SATURDAY || localtime(&localTime)->tm_wday == Day::SUNDAY)
             SetWorldRates(true);
     }
 
@@ -84,7 +84,7 @@ public:
     {
         localTime = time(NULL);
 
-        if (localtime(&localTime)->tm_wday == Day::FRIDAY && !triggered)
+        if ((localtime(&localTime)->tm_wday == Day::FRIDAY && localtime(&localTime)->tm_hour >= 18) && !triggered)
         {
             sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, granting you bonuses!");
             SetWorldRates(true);
