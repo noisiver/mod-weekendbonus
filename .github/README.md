@@ -1,0 +1,7 @@
+# Weekend Bonus
+This is a module for [AzerothCore](https://github.com/azerothcore/azerothcore-wotlk).
+
+# Features
+This module will increase the experience, money and reputation gained on weekends. That means friday, saturday and sunday. It will announce the start and end of the weekend bonus.
+
+The multipliers can be changed using the configuration options.
