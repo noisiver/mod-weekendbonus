@@ -5,11 +5,11 @@ void WeekendBonus::OnAfterConfigLoad(bool reload)
     if (!reload)
         LoadDefaultValues();
 
-    float ExperienceMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Experience", 2.0f);
-    float MoneyMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Money", 2.0f);
-    uint32 ProfessionsMultiplier = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Professions", 2);
-    float ReputationMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Reputation", 2.0f);
-    uint32 ProficienciesMultiplier = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Proficiencies", 2);
+    ExperienceMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Experience", 2.0f);
+    MoneyMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Money", 2.0f);
+    ProfessionsMultiplier = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Professions", 2);
+    ReputationMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Reputation", 2.0f);
+    ProficienciesMultiplier = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Proficiencies", 2);
 
     if (reload)
     {
