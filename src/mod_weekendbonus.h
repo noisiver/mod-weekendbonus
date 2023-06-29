@@ -17,13 +17,10 @@ enum Day
     SATURDAY
 };
 
-class WeekendBonus : public PlayerScript, WorldScript
+class WeekendBonus : public WorldScript
 {
 public:
     WeekendBonus();
-
-    // PlayerScript
-    void OnLogin(Player* /*player*/) override;
 
     // WorldScript
     void OnAfterConfigLoad(bool /*reload*/) override;
@@ -36,6 +33,10 @@ private:
 
     bool Triggered;
     time_t LocalTime;
+    Milliseconds CheckFrequency;
+    Milliseconds CheckTime;
+    Milliseconds AnnouncementFrequency;
+    Milliseconds AnnouncementTime;
 
     float ExperienceMultiplier;
     float MoneyMultiplier;

@@ -20,33 +20,6 @@ void WeekendBonus::OnAfterConfigLoad(bool reload)
     }
 }
 
-void WeekendBonus::OnStartup()
-{
-    Triggered = false;
-    LocalTime = time(NULL);
-
-    if ((localtime(&LocalTime)->tm_wday == Day::FRIDAY && localtime(&LocalTime)->tm_hour >= 18) || localtime(&LocalTime)->tm_wday == Day::SATURDAY || localtime(&LocalTime)->tm_wday == Day::SUNDAY)
-        SetRates(true);
-}
-
-void WeekendBonus::OnUpdate(uint32 /*diff*/)
-{
-    LocalTime = time(NULL);
-
-    if ((localtime(&LocalTime)->tm_wday == Day::FRIDAY && localtime(&LocalTime)->tm_hour >= 18) && !Triggered)
-    {
-        sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is now active, granting you bonuses!");
-        SetRates(true);
-        Triggered = true;
-    }
-    else if (localtime(&LocalTime)->tm_wday == Day::MONDAY && Triggered)
-    {
-        sWorld->SendServerMessage(SERVER_MSG_STRING, "The weekend bonus is no longer active.");
-        SetRates(false);
-        Triggered = false;
-    }
-}
-
 void WeekendBonus::LoadDefaultValues()
 {
     DefaultExperienceMultiplier[0] = sWorld->getRate(RATE_XP_KILL);
@@ -66,6 +39,9 @@ void WeekendBonus::LoadDefaultValues()
     DefaultReputationMultiplier = sWorld->getRate(RATE_REPUTATION_GAIN);
     DefaultProficienciesMultiplier[0] = sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE);
     DefaultProficienciesMultiplier[1] = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
+
+    CheckFrequency = 10s;
+    AnnouncementFrequency = 1h;
 }
 
 void WeekendBonus::SetRates(bool active)
@@ -110,4 +86,7 @@ void WeekendBonus::SetRates(bool active)
         sWorld->setIntConfig(CONFIG_SKILL_GAIN_DEFENSE, DefaultProficienciesMultiplier[0]);
         sWorld->setIntConfig(CONFIG_SKILL_GAIN_WEAPON, DefaultProficienciesMultiplier[1]);
     }
+
+    Triggered = active;
+    AnnouncementTime = 0s;
 }

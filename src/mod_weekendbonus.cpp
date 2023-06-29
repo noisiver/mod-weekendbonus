@@ -1,6 +1,6 @@
 #include "mod_weekendbonus.h"
 
-WeekendBonus::WeekendBonus() : PlayerScript("WeekendBonusPlayerScript"), WorldScript("WeekendBonusWorldScript") {}
+WeekendBonus::WeekendBonus() : WorldScript("WeekendBonusWorldScript") {}
 
 void Addmod_weekendbonusScripts()
 {
