@@ -40,7 +40,7 @@ void WeekendBonus::LoadDefaultValues()
     DefaultReputationMultiplier = sWorld->getRate(RATE_REPUTATION_GAIN);
     DefaultProficienciesMultiplier[0] = sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE);
     DefaultProficienciesMultiplier[1] = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
-    DefaultHonorMultiplier = sWorld->getFloatConfig(RATE_HONOR);
+    DefaultHonorMultiplier = sWorld->getRate(RATE_HONOR);
 
     CheckFrequency = 10s;
     AnnouncementFrequency = 1h;
