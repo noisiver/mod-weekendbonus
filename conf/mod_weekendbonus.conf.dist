@@ -14,3 +14,6 @@ WeekendBonus.Multiplier.Reputation = 2.0
 
 # Multiplier for weapons and defense skill ups on weekends
 WeekendBonus.Multiplier.Proficiencies = 2
+
+# Multiplier for honor gains on weekends
+WeekendBonus.Multiplier.Honor = 2.0

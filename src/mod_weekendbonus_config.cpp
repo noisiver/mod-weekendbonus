@@ -10,6 +10,7 @@ void WeekendBonus::OnAfterConfigLoad(bool reload)
     ProfessionsMultiplier = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Professions", 2);
     ReputationMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Reputation", 2.0f);
     ProficienciesMultiplier = sConfigMgr->GetOption<uint32>("WeekendBonus.Multiplier.Proficiencies", 2);
+    HonorMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Honor", 2.0f);
 
     if (reload)
     {
@@ -39,6 +40,7 @@ void WeekendBonus::LoadDefaultValues()
     DefaultReputationMultiplier = sWorld->getRate(RATE_REPUTATION_GAIN);
     DefaultProficienciesMultiplier[0] = sWorld->getIntConfig(CONFIG_SKILL_GAIN_DEFENSE);
     DefaultProficienciesMultiplier[1] = sWorld->getIntConfig(CONFIG_SKILL_GAIN_WEAPON);
+    DefaultHonorMultiplier = sWorld->getFloatConfig(RATE_HONOR);
 
     CheckFrequency = 10s;
     AnnouncementFrequency = 1h;
@@ -65,6 +67,7 @@ void WeekendBonus::SetRates(bool active)
         sWorld->setRate(RATE_REPUTATION_GAIN, DefaultReputationMultiplier * ReputationMultiplier);
         sWorld->setIntConfig(CONFIG_SKILL_GAIN_DEFENSE, DefaultProficienciesMultiplier[0] * ProficienciesMultiplier);
         sWorld->setIntConfig(CONFIG_SKILL_GAIN_WEAPON, DefaultProficienciesMultiplier[1] * ProficienciesMultiplier);
+        sWorld->setRate(RATE_HONOR, DefaultHonorMultiplier * HonorMultiplier);
     }
     else
     {
@@ -85,6 +88,7 @@ void WeekendBonus::SetRates(bool active)
         sWorld->setRate(RATE_REPUTATION_GAIN, DefaultReputationMultiplier);
         sWorld->setIntConfig(CONFIG_SKILL_GAIN_DEFENSE, DefaultProficienciesMultiplier[0]);
         sWorld->setIntConfig(CONFIG_SKILL_GAIN_WEAPON, DefaultProficienciesMultiplier[1]);
+        sWorld->setRate(RATE_HONOR, DefaultHonorMultiplier);
     }
 
     Triggered = active;

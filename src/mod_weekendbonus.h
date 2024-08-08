@@ -43,6 +43,7 @@ private:
     uint32 ProfessionsMultiplier;
     float ReputationMultiplier;
     uint32 ProficienciesMultiplier;
+    float HonorMultiplier;
 
     float DefaultExperienceMultiplier[6];
     float DefaultBattlegroundExperienceMultiplier[6];
@@ -50,6 +51,7 @@ private:
     uint32 DefaultProficienciesMultiplier[2];
     float DefaultMoneyMultiplier;
     float DefaultReputationMultiplier;
+    float DefaultHonorMultiplier;
 };
 
 #endif
