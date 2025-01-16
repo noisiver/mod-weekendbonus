@@ -2,6 +2,11 @@
 
 void WeekendBonus::OnStartup()
 {
+    if (!HasActiveMultipliers)
+    {
+        return;
+    }
+
     Triggered = false;
     LocalTime = time(NULL);
 
@@ -11,6 +16,11 @@ void WeekendBonus::OnStartup()
 
 void WeekendBonus::OnUpdate(uint32 diff)
 {
+    if (!HasActiveMultipliers)
+    {
+        return;
+    }
+
     CheckTime += Milliseconds(diff);
     if (CheckTime > CheckFrequency)
     {
@@ -39,4 +49,14 @@ void WeekendBonus::OnUpdate(uint32 diff)
             AnnouncementTime = 0s;
         }
     }
+}
+
+bool WeekendBonus::HasActiveMultipliers()
+{
+    if (ExperienceMultiplier > 1 || MoneyMultiplier > 1 || ProfessionsMultiplier > 1 || ReputationMultiplier > 1 || ProficienciesMultiplier > 1 || HonorMultiplier > 1)
+    {
+        return true;
+    }
+
+    return false;
 }

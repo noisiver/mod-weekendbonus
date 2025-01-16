@@ -30,6 +30,7 @@ public:
 private:
     void LoadDefaultValues();
     void SetRates(bool /*active*/);
+    bool HasActiveMultipliers();
 
     bool Triggered;
     time_t LocalTime;
