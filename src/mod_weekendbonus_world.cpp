@@ -2,7 +2,7 @@
 
 void WeekendBonus::OnStartup()
 {
-    if (!HasActiveMultipliers)
+    if (!HasActiveMultipliers())
     {
         return;
     }
@@ -16,7 +16,7 @@ void WeekendBonus::OnStartup()
 
 void WeekendBonus::OnUpdate(uint32 diff)
 {
-    if (!HasActiveMultipliers)
+    if (!HasActiveMultipliers())
     {
         return;
     }
