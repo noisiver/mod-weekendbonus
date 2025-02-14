@@ -1,9 +1,6 @@
 #ifndef MOD_WEEKENDBONUS_H
 #define MOD_WEEKENDBONUS_H
 
-#include "Chat.h"
-#include "Config.h"
-#include "Player.h"
 #include "ScriptMgr.h"
 
 enum Day

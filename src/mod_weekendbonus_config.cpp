@@ -1,9 +1,13 @@
 #include "mod_weekendbonus.h"
 
+#include "Config.h"
+
 void WeekendBonus::OnAfterConfigLoad(bool reload)
 {
     if (!reload)
+    {
         LoadDefaultValues();
+    }
 
     ExperienceMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Experience", 2.0f);
     MoneyMultiplier = sConfigMgr->GetOption<float>("WeekendBonus.Multiplier.Money", 2.0f);
@@ -15,9 +19,13 @@ void WeekendBonus::OnAfterConfigLoad(bool reload)
     if (reload)
     {
         if ((localtime(&LocalTime)->tm_wday == Day::FRIDAY && localtime(&LocalTime)->tm_hour >= 18) || localtime(&LocalTime)->tm_wday == Day::SATURDAY || localtime(&LocalTime)->tm_wday == Day::SUNDAY)
+        {
             SetRates(true);
+        }
         else
+        {
             SetRates(false);
+        }
     }
 }
 
