@@ -14,10 +14,13 @@ enum Day
     SATURDAY
 };
 
-class WeekendBonus : public WorldScript
+class WeekendBonus : public PlayerScript, WorldScript
 {
 public:
     WeekendBonus();
+
+    // PlayerScript
+    void OnPlayerLogin(Player* /*player*/) override;
 
     // WorldScript
     void OnAfterConfigLoad(bool /*reload*/) override;
